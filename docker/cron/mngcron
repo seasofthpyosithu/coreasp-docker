@@ -1,0 +1,24 @@
+#iPhone通知送信
+00,30 * * * * php /var/www/management/libs_ver2.0/core/push/cron/scheduling_iphone_balancing.php > /proc/1/fd/1 2>/proc/1/fd/2
+01,31 * * * * php /var/www/management/libs_ver2.0/core/push/cron/scheduling_iphone_segment.php > /proc/1/fd/1 2>/proc/1/fd/2
+
+00 * * * * php /var/www/management/libs_ver2.0/core/push/cron/scheduling_iphone_individual.php > /proc/1/fd/1 2>/proc/1/fd/2
+15 * * * * php /var/www/management/libs_ver2.0/core/push/cron/scheduling_iphone_individual.php > /proc/1/fd/1 2>/proc/1/fd/2
+30 * * * * php /var/www/management/libs_ver2.0/core/push/cron/scheduling_iphone_individual.php > /proc/1/fd/1 2>/proc/1/fd/2
+45 * * * * php /var/www/management/libs_ver2.0/core/push/cron/scheduling_iphone_individual.php > /proc/1/fd/1 2>/proc/1/fd/2
+
+#Android通知送信
+00,30 * * * * php /var/www/management/libs_ver2.0/core/push/cron/scheduling_android.php > /proc/1/fd/1 2>/proc/1/fd/2
+01,31 * * * * php /var/www/management/libs_ver2.0/core/push/cron/scheduling_android_segment.php > /proc/1/fd/1 2>/proc/1/fd/2
+
+00 * * * * php /var/www/management/libs_ver2.0/core/push/cron/scheduling_android_individual.php > /proc/1/fd/1 2>/proc/1/fd/2
+15 * * * * php /var/www/management/libs_ver2.0/core/push/cron/scheduling_android_individual.php > /proc/1/fd/1 2>/proc/1/fd/2
+30 * * * * php /var/www/management/libs_ver2.0/core/push/cron/scheduling_android_individual.php > /proc/1/fd/1 2>/proc/1/fd/2
+45 * * * * php /var/www/management/libs_ver2.0/core/push/cron/scheduling_android_individual.php > /proc/1/fd/1 2>/proc/1/fd/2
+
+#繰り返し通知
+00,30 * * * * php /var/www/management/libs_ver2.0/core/push/cron/repeat_scheduling_iphone.php > /proc/1/fd/1 2>/proc/1/fd/2
+00,30 * * * * php /var/www/management/libs_ver2.0/core/push/cron/repeat_scheduling_android.php > /proc/1/fd/1 2>/proc/1/fd/2
+
+* * * * *  php /var/www/management/scripts/iphone_ab_time.php > /proc/1/fd/1 2>/proc/1/fd/2
+* * * * *  php /var/www/management/scripts/android_ab_time.php > /proc/1/fd/1 2>/proc/1/fd/2

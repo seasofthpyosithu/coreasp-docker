@@ -1,0 +1,98 @@
+<?php
+
+/****************************************
+ *
+ *	環境設定ファイル
+ *
+ ****************************************/
+// サイトURLの設定（環境に合わせて変更してください）
+
+
+$siteurl = "http://localhost:8000";
+// ROOTの設定
+define('ROOT', $siteurl);
+// ROOTDIRの設定
+define('ROOTDIR', '/var/www/management/');
+
+// PUSHのURL
+define('PUSH', $siteurl . "corepush/");
+// PUSHのディレクトリ
+define('PUSHDIR',  ROOTDIR . 'corepush/');
+
+
+
+// CSSフォルダ
+define('CSS', $siteurl . 'css/');
+// Javascriptフォルダ
+define('JS', $siteurl . 'js/');
+// 画像フォルダURL
+define('IMAGES', $siteurl . 'images/');
+// 画像ディレクトリ
+define('IMAGEDIR', ROOTDIR . 'images/');
+
+// 一時ファイルディレクトリ
+define('TMPDIR', ROOTDIR . 'tmp/');
+// pemファイル作成一時ファイルディレクトリ
+define('TMPDIR_PEM', '/var/www/management/pem/tmp/');
+
+// php実行ログ保存ファイルディレクトリ
+define('LOG_PHP', '/var/www/management/core_log/php.log');
+// iPhone通知実行ログ保存ファイルディレクトリ
+define('LOG_IPHONE_NOTIFY', '/var/www/management/core_log/iPhoneNotify.log');
+// android通知実行ログ保存ファイルディレクトリ
+define('LOG_ANDROID_NOTIFY', '/var/www/management/core_log/androidNotify.log');
+
+// ログアウト
+define('LOGOUT', ROOT . 'logout.php');
+
+// ** MySQL 設定 ** //
+/** データベース名 */
+define('DB_NAME', 'coreasp_v2_master');
+/** MySQL のユーザー名 */
+define('DB_USER', 'coreaspdbmaster');
+/** MySQL のパスワード */
+define('DB_PASSWORD', 'Ns918$jaH82NmRr!eGw7');
+/** MySQL のホスト名 */
+define('DB_HOST', 'master_db');
+/** データベーステーブルのキャラクターセット*/
+define('DB_CHARSET', 'utf8');
+
+/** MySQL のホスト名 */
+define('QDB1', 'queue_db');
+define('QDB2', 'queue_db');
+define('QDB', 'queue_db');
+
+define('QUEUE_HOST', 'queue');
+
+define('Q_DB_NAME', 'coreasp_v2_queue');
+
+//Private IPで接続するためにElastic IPは使用しない
+
+$slave4 = 'master_db';
+$slave2 = 'master_db'; //管理画面用スレーブDBに接続
+$slave3 = 'master_db'; //管理画面用スレーブDBに接続
+$slave1 = 'master_db';
+$slave5 = 'master_db';
+
+//DBManagerからglobalで取得する
+$slaveHosts = array(
+	$slave4,
+	//完全に分散を行う場合は下記のコメント記号を削除
+	//	$slave2,
+	$slave3,
+	//	$slave1
+);
+
+
+/** Google Analytics */
+define('GA_ACCOUNT', 'UA-28092437-1');
+
+/****************************************
+ *
+ *	その他定数設定
+ *
+ ****************************************/
+
+// エラー非表示
+error_reporting(E_ALL & ~(E_DEPRECATED | E_STRICT));
+ini_set('display_errors', '0');
