@@ -1,0 +1,12 @@
+[submodule "src/mng"]
+	path = src/mng
+	url = https://github.com/seasoft-yukawa/wolf_fang_admin.git
+	branch = dev
+[submodule "src/api"]
+	path = src/api
+	url = https://github.com/seasoft-yukawa/wolf_fang_api.git
+	branch = dev
+[submodule "src/queue_worker"]
+	path = src/queue_worker
+	url = https://github.com/seasoft-yukawa/wolf_fang_queue_worker.git
+	branch = dev
