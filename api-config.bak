@@ -7,7 +7,7 @@
  ****************************************/
 // サイトURLの設定（環境に合わせて変更してください）
 
-$siteurl = "http://localhost:8080";
+$siteurl = "http://localhost:8080/";
 
 // ROOTの設定
 define('ROOT', $siteurl);
