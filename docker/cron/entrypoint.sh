@@ -24,6 +24,5 @@ start() {
 }
 
 start
-start
 monitor "$LIB" &
 monitor "$SCRIPT"
