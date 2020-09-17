@@ -8,6 +8,7 @@ COPY ./src/mng .
 
 # RUN chown -R root:apache  /var/www/management/tmp && chmod 777 /var/www/management/tmp
 
+RUN chmod -R 777 pem/
 
 EXPOSE 9000
 
