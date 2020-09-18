@@ -1,4 +1,5 @@
 #iPhone通知送信
+00,30 * * * * php /var/www/management/libs_ver2.0/core/push/cron/scheduling_iphone.php > /proc/1/fd/1 2>/proc/1/fd/2
 00,30 * * * * php /var/www/management/libs_ver2.0/core/push/cron/scheduling_iphone_balancing.php > /proc/1/fd/1 2>/proc/1/fd/2
 01,31 * * * * php /var/www/management/libs_ver2.0/core/push/cron/scheduling_iphone_segment.php > /proc/1/fd/1 2>/proc/1/fd/2
 
