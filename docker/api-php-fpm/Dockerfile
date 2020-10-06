@@ -7,6 +7,8 @@ WORKDIR /var/www/api
 # RUN chown -R root:apache  /var/www/mng/tmp && chmod 777 /var/www/mng/tmp
 COPY ./src/api .
 
+RUN chown -R root:apache  /var/www/api/log && chmod 777 /var/www/api/log
+
 EXPOSE 9000
 
 CMD [ "php-fpm"]
