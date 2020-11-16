@@ -10,3 +10,9 @@
 	path = src/queue_worker
 	url = https://github.com/seasoft-yukawa/wolf_fang_queue_worker.git
 	branch = dev
+[submodule ".src/queue"]
+	path = .src/queue
+	url = https://github.com/seasoft-yukawa/wolf_fang_queue.git
+[submodule "src/queue"]
+	path = src/queue
+	url = https://github.com/seasoft-yukawa/wolf_fang_queue.git
