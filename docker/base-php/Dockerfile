@@ -1,4 +1,7 @@
-FROM centos:6.6
+FROM centos:6.10
+
+COPY "./docker/yum.repos.d/." "/etc/yum.repos.d/"
+COPY "./docker/rpm-gpg/." "/etc/pki/rpm-gpg/"
 
 RUN yum install -y php \
     php-mysql \
@@ -21,3 +24,5 @@ RUN pear install XML_Parser
 RUN pecl install gearman
 
 COPY ./docker/base-php/php.ini /etc/php.ini
+
+CMD ["/bin/bash"]
