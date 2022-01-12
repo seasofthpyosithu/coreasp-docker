@@ -21,7 +21,7 @@ RUN yum install -y libgearman \
 RUN pear install MDB2-beta
 RUN pear install MDB2_Driver_mysql-beta
 RUN pear install XML_Parser
-RUN pecl install gearman
+RUN pecl install gearman-1.1.1
 
 COPY ./docker/base-php/php.ini /etc/php.ini
 
