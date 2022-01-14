@@ -1,7 +1,4 @@
-FROM centos:6.10
-
-COPY "./docker/yum.repos.d/." "/etc/yum.repos.d/"
-COPY "./docker/rpm-gpg/." "/etc/pki/rpm-gpg/"
+FROM base-centos:latest
 
 RUN yum install -y php \
     php-mysql \
@@ -9,14 +6,11 @@ RUN yum install -y php \
     php-mbstring \
     php-fpm \
     php-devel \
-    epel-release
-
-RUN sed -i "s/mirrorlist=https/mirrorlist=http/" "/etc/yum.repos.d/epel.repo"
-
-RUN yum groupinstall -y 'Development Tools'
-
-RUN yum install -y libgearman \
+    epel-release \
+    libgearman \
     libgearman-devel
+
+RUN yum clean all
 
 RUN pear install MDB2-beta
 RUN pear install MDB2_Driver_mysql-beta
