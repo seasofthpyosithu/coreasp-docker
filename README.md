@@ -1,4 +1,4 @@
-** Remark: Step 1, 2, 3 only need to run one time. Unless those base image file update no need to build those image again **
+**Remark: Step 1, 2, 3 only need to run one time. Unless those base image file update no need to build those image again**
 
 step 1. Build base centos
 
