@@ -1,4 +1,4 @@
-ealFROM centos:6.10
+FROM centos:6.10
 
 COPY "./docker/base-centos/yum.repos.d/." "/etc/yum.repos.d/"
 COPY "./docker/base-centos/rpm-gpg/." "/etc/pki/rpm-gpg/"
