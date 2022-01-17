@@ -1,7 +1,7 @@
 FROM base-php:latest
 
-RUN yum install -y gearmand \
-    gearman
+# RUN yum install -y gearmand \
+#     gearman
 
 
 WORKDIR /app

@@ -1,4 +1,4 @@
-FROM centos:6.10
+ealFROM centos:6.10
 
 COPY "./docker/base-centos/yum.repos.d/." "/etc/yum.repos.d/"
 COPY "./docker/base-centos/rpm-gpg/." "/etc/pki/rpm-gpg/"
@@ -7,6 +7,9 @@ RUN yum install -y pcre \
     pcre-devel \
     zlib \    
     zlib-devel
+
+RUN yum install -y gearmand \
+    gearman
 
 RUN yum groupinstall -y Base
 RUN yum groupinstall -y 'Development Tools'
@@ -28,7 +31,5 @@ RUN ./configure --with-ssl=/usr/local/ssl --with-nghttp2
 RUN make install
 
 RUN echo '/usr/local/lib' >> /etc/ld.so.conf.d/custom-libs.conf
-
-RUN yum clean all
 
 CMD ["/bin/bash"]
