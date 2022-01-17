@@ -1,11 +1,23 @@
--- Adminer 4.7.7 MySQL dump
+-- -------------------------------------------------------------
+-- TablePlus 4.5.2(402)
+--
+-- https://tableplus.com/
+--
+-- Database: coreasp_v2_queue
+-- Generation Time: 2022-01-17 08:52:00.1380
+-- -------------------------------------------------------------
 
-SET NAMES utf8;
-SET time_zone = '+00:00';
-SET foreign_key_checks = 0;
-SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
-DROP TABLE IF EXISTS `action_log`;
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+
 CREATE TABLE `action_log` (
   `log_id` int(10) NOT NULL AUTO_INCREMENT,
   `config_type` int(1) DEFAULT NULL COMMENT '1:iPhone、2:Android',
@@ -23,8 +35,6 @@ CREATE TABLE `action_log` (
   KEY `idx` (`push_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
-DROP TABLE IF EXISTS `action_mst`;
 CREATE TABLE `action_mst` (
   `action_id` int(11) NOT NULL AUTO_INCREMENT,
   `action_key` varchar(3) COLLATE utf8_unicode_ci NOT NULL COMMENT '3桁数値のアクションキー',
@@ -32,8 +42,6 @@ CREATE TABLE `action_mst` (
   PRIMARY KEY (`action_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
-DROP TABLE IF EXISTS `analytics_log`;
 CREATE TABLE `analytics_log` (
   `log_id` int(10) NOT NULL AUTO_INCREMENT,
   `config_type` int(1) DEFAULT NULL COMMENT '1:iPhone、2:Android',
@@ -51,17 +59,15 @@ CREATE TABLE `analytics_log` (
   PRIMARY KEY (`log_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='アクセス解析ログ保存用テーブル';
 
-
-DROP TABLE IF EXISTS `android_balancing_queue`;
 CREATE TABLE `android_balancing_queue` (
   `queue_id` int(10) NOT NULL AUTO_INCREMENT,
   `queue_group` varchar(30) NOT NULL,
   `queue_index` int(10) NOT NULL DEFAULT '1',
   `user_id` int(10) NOT NULL,
   `config_id` int(10) NOT NULL,
-  `category_id` text NOT NULL,
+  `category_id` text,
   `device_token` text NOT NULL,
-  `url` text NOT NULL,
+  `url` text,
   `title` text NOT NULL,
   `message` text NOT NULL,
   `push_type` tinyint(1) DEFAULT '1',
@@ -73,10 +79,30 @@ CREATE TABLE `android_balancing_queue` (
   KEY `idx2` (`queue_group`,`queue_index`),
   KEY `idx3` (`status`),
   KEY `idx4` (`config_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1484795513 DEFAULT CHARSET=utf8;
 
+CREATE TABLE `android_balancing_queue_copy` (
+  `queue_id` int(10) NOT NULL AUTO_INCREMENT,
+  `queue_group` varchar(30) NOT NULL,
+  `queue_index` int(10) NOT NULL DEFAULT '1',
+  `user_id` int(10) NOT NULL,
+  `config_id` int(10) NOT NULL,
+  `category_id` text,
+  `device_token` text NOT NULL,
+  `url` text,
+  `title` text NOT NULL,
+  `message` text NOT NULL,
+  `push_type` tinyint(1) DEFAULT '1',
+  `status` tinyint(1) DEFAULT '1',
+  `code` int(2) DEFAULT '-1',
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`queue_id`),
+  KEY `idx` (`queue_group`),
+  KEY `idx2` (`queue_group`,`queue_index`),
+  KEY `idx3` (`status`),
+  KEY `idx4` (`config_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1007478 DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `android_balancing_queue_old`;
 CREATE TABLE `android_balancing_queue_old` (
   `queue_id` int(10) NOT NULL AUTO_INCREMENT,
   `queue_group` varchar(30) NOT NULL,
@@ -99,8 +125,6 @@ CREATE TABLE `android_balancing_queue_old` (
   KEY `idx4` (`config_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-DROP TABLE IF EXISTS `android_config`;
 CREATE TABLE `android_config` (
   `config_id` int(10) NOT NULL AUTO_INCREMENT,
   `config_name` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
@@ -112,8 +136,6 @@ CREATE TABLE `android_config` (
   KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
-DROP TABLE IF EXISTS `android_config_category`;
 CREATE TABLE `android_config_category` (
   `android_config_category_id` int(10) NOT NULL AUTO_INCREMENT,
   `config_id` int(10) NOT NULL,
@@ -122,8 +144,6 @@ CREATE TABLE `android_config_category` (
   PRIMARY KEY (`android_config_category_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
-DROP TABLE IF EXISTS `android_config_key`;
 CREATE TABLE `android_config_key` (
   `key_id` int(10) NOT NULL AUTO_INCREMENT,
   `config_id` int(10) NOT NULL,
@@ -132,8 +152,6 @@ CREATE TABLE `android_config_key` (
   PRIMARY KEY (`key_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
-DROP TABLE IF EXISTS `android_config_sub_category`;
 CREATE TABLE `android_config_sub_category` (
   `iphone_config_category_id` int(10) NOT NULL AUTO_INCREMENT,
   `config_id` int(10) NOT NULL,
@@ -143,8 +161,6 @@ CREATE TABLE `android_config_sub_category` (
   PRIMARY KEY (`iphone_config_category_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-DROP TABLE IF EXISTS `android_error_remove_reserve`;
 CREATE TABLE `android_error_remove_reserve` (
   `schedule_id` int(10) NOT NULL AUTO_INCREMENT,
   `config_id` int(10) NOT NULL,
@@ -159,8 +175,6 @@ CREATE TABLE `android_error_remove_reserve` (
   KEY `idx3` (`finish_flg`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-DROP TABLE IF EXISTS `android_error_token`;
 CREATE TABLE `android_error_token` (
   `token_id` int(10) NOT NULL AUTO_INCREMENT,
   `queue_group` varchar(25) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -173,10 +187,8 @@ CREATE TABLE `android_error_token` (
   `reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`token_id`),
   KEY `idx` (`queue_group`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1653476959 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
-DROP TABLE IF EXISTS `android_geo_notify`;
 CREATE TABLE `android_geo_notify` (
   `geo_id` int(10) NOT NULL AUTO_INCREMENT,
   `event_id` int(10) NOT NULL COMMENT 'geo_event.event_id',
@@ -184,8 +196,6 @@ CREATE TABLE `android_geo_notify` (
   PRIMARY KEY (`geo_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
-DROP TABLE IF EXISTS `android_history`;
 CREATE TABLE `android_history` (
   `history_id` int(10) NOT NULL AUTO_INCREMENT,
   `user_id` int(10) NOT NULL,
@@ -204,8 +214,6 @@ CREATE TABLE `android_history` (
   KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
-DROP TABLE IF EXISTS `android_history_segment`;
 CREATE TABLE `android_history_segment` (
   `id` int(12) NOT NULL AUTO_INCREMENT,
   `config_id` int(10) NOT NULL,
@@ -227,8 +235,6 @@ CREATE TABLE `android_history_segment` (
   KEY `idx4` (`config_id`,`category_id`,`category_value`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-DROP TABLE IF EXISTS `android_last_plan`;
 CREATE TABLE `android_last_plan` (
   `config_id` int(10) NOT NULL,
   `user_id` int(10) NOT NULL,
@@ -238,8 +244,6 @@ CREATE TABLE `android_last_plan` (
   KEY `uid` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-DROP TABLE IF EXISTS `android_multi_category`;
 CREATE TABLE `android_multi_category` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
   `config_id` int(10) NOT NULL,
@@ -252,8 +256,6 @@ CREATE TABLE `android_multi_category` (
   KEY `deviceToken` (`device_token`(255))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-DROP TABLE IF EXISTS `android_panelist_balancing_queue`;
 CREATE TABLE `android_panelist_balancing_queue` (
   `queue_id` int(10) NOT NULL AUTO_INCREMENT,
   `queue_group` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
@@ -274,8 +276,6 @@ CREATE TABLE `android_panelist_balancing_queue` (
   KEY `questionnaire_id` (`questionnaire_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
-DROP TABLE IF EXISTS `android_panelist_history`;
 CREATE TABLE `android_panelist_history` (
   `history_id` int(10) NOT NULL AUTO_INCREMENT,
   `user_id` int(10) NOT NULL,
@@ -296,8 +296,6 @@ CREATE TABLE `android_panelist_history` (
   KEY `queue_group` (`queue_group`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
-DROP TABLE IF EXISTS `android_panelist_queue_group`;
 CREATE TABLE `android_panelist_queue_group` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `config_id` int(10) DEFAULT NULL,
@@ -316,8 +314,6 @@ CREATE TABLE `android_panelist_queue_group` (
   KEY `questionnaire_id` (`questionnaire_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
-DROP TABLE IF EXISTS `android_push_request_queue`;
 CREATE TABLE `android_push_request_queue` (
   `queue_id` bigint(16) NOT NULL AUTO_INCREMENT,
   `user_id` int(10) NOT NULL,
@@ -335,8 +331,6 @@ CREATE TABLE `android_push_request_queue` (
   KEY `requestGroup` (`request_group`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
-DROP TABLE IF EXISTS `android_queue`;
 CREATE TABLE `android_queue` (
   `queue_id` int(10) NOT NULL AUTO_INCREMENT,
   `user_id` int(10) NOT NULL,
@@ -351,8 +345,6 @@ CREATE TABLE `android_queue` (
   KEY `idx` (`config_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
-DROP TABLE IF EXISTS `android_queue_group`;
 CREATE TABLE `android_queue_group` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `config_id` int(10) DEFAULT NULL,
@@ -369,10 +361,8 @@ CREATE TABLE `android_queue_group` (
   PRIMARY KEY (`id`),
   KEY `idx1` (`config_id`),
   KEY `idx2` (`queue_group`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4329 DEFAULT CHARSET=utf8;
 
-
-DROP TABLE IF EXISTS `android_schedule`;
 CREATE TABLE `android_schedule` (
   `schedule_id` int(10) NOT NULL AUTO_INCREMENT,
   `config_id` int(10) NOT NULL,
@@ -387,8 +377,6 @@ CREATE TABLE `android_schedule` (
   PRIMARY KEY (`schedule_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
-DROP TABLE IF EXISTS `android_schedule_segment`;
 CREATE TABLE `android_schedule_segment` (
   `id` int(12) NOT NULL AUTO_INCREMENT,
   `config_id` int(10) NOT NULL,
@@ -410,8 +398,6 @@ CREATE TABLE `android_schedule_segment` (
   KEY `idx4` (`category_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-DROP TABLE IF EXISTS `android_survey_balancing_queue`;
 CREATE TABLE `android_survey_balancing_queue` (
   `queue_id` int(10) NOT NULL AUTO_INCREMENT,
   `queue_group` varchar(30) NOT NULL,
@@ -434,8 +420,6 @@ CREATE TABLE `android_survey_balancing_queue` (
   KEY `uuid` (`uuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-DROP TABLE IF EXISTS `android_survey_history`;
 CREATE TABLE `android_survey_history` (
   `history_id` int(10) NOT NULL AUTO_INCREMENT,
   `user_id` int(10) NOT NULL,
@@ -456,8 +440,6 @@ CREATE TABLE `android_survey_history` (
   KEY `queue_group` (`queue_group`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
-DROP TABLE IF EXISTS `android_survey_queue_group`;
 CREATE TABLE `android_survey_queue_group` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `config_id` int(10) DEFAULT NULL,
@@ -476,8 +458,6 @@ CREATE TABLE `android_survey_queue_group` (
   KEY `questionnaire_id` (`questionnaire_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
-DROP TABLE IF EXISTS `android_token`;
 CREATE TABLE `android_token` (
   `token_id` int(10) NOT NULL AUTO_INCREMENT,
   `config_id` int(10) NOT NULL,
@@ -495,8 +475,6 @@ CREATE TABLE `android_token` (
   KEY `token_index` (`device_token`(255))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
-DROP TABLE IF EXISTS `android_token_count`;
 CREATE TABLE `android_token_count` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `config_id` int(10) DEFAULT '0',
@@ -514,8 +492,6 @@ CREATE TABLE `android_token_count` (
   KEY `idx2` (`config_id`,`category_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-DROP TABLE IF EXISTS `android_token_relation`;
 CREATE TABLE `android_token_relation` (
   `token_id` int(10) NOT NULL AUTO_INCREMENT,
   `config_id` int(10) NOT NULL,
@@ -528,8 +504,6 @@ CREATE TABLE `android_token_relation` (
   KEY `deviceToken` (`device_token`(255))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
-DROP TABLE IF EXISTS `android_token_research_relation`;
 CREATE TABLE `android_token_research_relation` (
   `token_id` int(10) NOT NULL AUTO_INCREMENT,
   `config_id` int(10) NOT NULL,
@@ -542,8 +516,6 @@ CREATE TABLE `android_token_research_relation` (
   KEY `idx2` (`device_token`(255))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
-DROP TABLE IF EXISTS `contact_history`;
 CREATE TABLE `contact_history` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `user_id` int(10) NOT NULL DEFAULT '0',
@@ -557,8 +529,6 @@ CREATE TABLE `contact_history` (
   KEY `user_checked` (`user_checked`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-DROP TABLE IF EXISTS `customer`;
 CREATE TABLE `customer` (
   `customer_id` int(11) NOT NULL AUTO_INCREMENT,
   `customer_type` int(1) NOT NULL COMMENT '1:資料請求、2:問い合わせ、3:会員登録済み',
@@ -575,8 +545,6 @@ CREATE TABLE `customer` (
   UNIQUE KEY `customer_id` (`customer_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='見込み顧客';
 
-
-DROP TABLE IF EXISTS `d_answer`;
 CREATE TABLE `d_answer` (
   `d_choice_id` int(11) NOT NULL AUTO_INCREMENT,
   `questionnaire_id` int(11) NOT NULL DEFAULT '0',
@@ -593,8 +561,6 @@ CREATE TABLE `d_answer` (
   KEY `idx4` (`uuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
-DROP TABLE IF EXISTS `geo_event`;
 CREATE TABLE `geo_event` (
   `event_id` int(10) NOT NULL AUTO_INCREMENT,
   `event_name` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
@@ -614,17 +580,38 @@ CREATE TABLE `geo_event` (
   PRIMARY KEY (`event_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
-DROP TABLE IF EXISTS `iphone_balancing_queue`;
 CREATE TABLE `iphone_balancing_queue` (
   `queue_id` int(10) NOT NULL AUTO_INCREMENT,
   `queue_group` varchar(30) NOT NULL,
   `queue_index` int(10) NOT NULL DEFAULT '1',
   `user_id` int(10) NOT NULL,
   `config_id` int(10) NOT NULL,
-  `category_id` text NOT NULL,
-  `device_token` text NOT NULL,
-  `url` text NOT NULL,
+  `category_id` text,
+  `device_token` varchar(255) NOT NULL,
+  `url` text,
+  `message` text NOT NULL,
+  `title` text NOT NULL,
+  `push_type` tinyint(1) DEFAULT '1' COMMENT '1:Realtime Bulk 2:Realtime Segment 3:Time Distributed 4:Schedule Segment 5:Repeat',
+  `status` tinyint(1) DEFAULT '0',
+  `code` int(2) DEFAULT '-1',
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `user_deleted_flag` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`queue_id`),
+  KEY `idx` (`queue_group`),
+  KEY `idx2` (`queue_group`,`queue_index`),
+  KEY `idx3` (`status`),
+  KEY `idx4` (`config_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1372172632 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `iphone_balancing_queue_backup` (
+  `queue_id` int(10) NOT NULL AUTO_INCREMENT,
+  `queue_group` varchar(30) NOT NULL,
+  `queue_index` int(10) NOT NULL DEFAULT '1',
+  `user_id` int(10) NOT NULL,
+  `config_id` int(10) NOT NULL,
+  `category_id` text,
+  `device_token` varchar(255) NOT NULL,
+  `url` text,
   `message` text NOT NULL,
   `title` text NOT NULL,
   `push_type` tinyint(1) DEFAULT '1',
@@ -636,10 +623,8 @@ CREATE TABLE `iphone_balancing_queue` (
   KEY `idx2` (`queue_group`,`queue_index`),
   KEY `idx3` (`status`),
   KEY `idx4` (`config_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1372133311 DEFAULT CHARSET=utf8;
 
-
-DROP TABLE IF EXISTS `iphone_config`;
 CREATE TABLE `iphone_config` (
   `config_id` int(10) NOT NULL AUTO_INCREMENT,
   `config_name` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
@@ -653,8 +638,6 @@ CREATE TABLE `iphone_config` (
   CONSTRAINT `iphone_config_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
-DROP TABLE IF EXISTS `iphone_config_category`;
 CREATE TABLE `iphone_config_category` (
   `iphone_config_category_id` int(10) NOT NULL AUTO_INCREMENT,
   `config_id` int(10) NOT NULL,
@@ -663,8 +646,6 @@ CREATE TABLE `iphone_config_category` (
   PRIMARY KEY (`iphone_config_category_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
-DROP TABLE IF EXISTS `iphone_config_key`;
 CREATE TABLE `iphone_config_key` (
   `key_id` int(10) NOT NULL AUTO_INCREMENT,
   `config_id` int(10) NOT NULL,
@@ -673,8 +654,6 @@ CREATE TABLE `iphone_config_key` (
   PRIMARY KEY (`key_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
-DROP TABLE IF EXISTS `iphone_config_sub_category`;
 CREATE TABLE `iphone_config_sub_category` (
   `iphone_config_category_id` int(10) NOT NULL AUTO_INCREMENT,
   `config_id` int(10) NOT NULL,
@@ -684,8 +663,6 @@ CREATE TABLE `iphone_config_sub_category` (
   PRIMARY KEY (`iphone_config_category_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-DROP TABLE IF EXISTS `iphone_error_remove_reserve`;
 CREATE TABLE `iphone_error_remove_reserve` (
   `schedule_id` int(10) NOT NULL AUTO_INCREMENT,
   `config_id` int(10) NOT NULL,
@@ -700,8 +677,6 @@ CREATE TABLE `iphone_error_remove_reserve` (
   KEY `idx3` (`finish_flg`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-DROP TABLE IF EXISTS `iphone_error_token`;
 CREATE TABLE `iphone_error_token` (
   `token_id` int(10) NOT NULL AUTO_INCREMENT,
   `queue_group` varchar(25) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -714,10 +689,8 @@ CREATE TABLE `iphone_error_token` (
   `reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`token_id`),
   KEY `idx` (`queue_group`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=168872437 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
-DROP TABLE IF EXISTS `iphone_error_token_rich`;
 CREATE TABLE `iphone_error_token_rich` (
   `token_id` int(10) NOT NULL AUTO_INCREMENT,
   `queue_group` varchar(25) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -735,8 +708,6 @@ CREATE TABLE `iphone_error_token_rich` (
   KEY `idx4` (`status_code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
-DROP TABLE IF EXISTS `iphone_geo_notify`;
 CREATE TABLE `iphone_geo_notify` (
   `geo_id` int(10) NOT NULL AUTO_INCREMENT,
   `event_id` int(10) NOT NULL COMMENT 'geo_event.event_id',
@@ -744,8 +715,6 @@ CREATE TABLE `iphone_geo_notify` (
   PRIMARY KEY (`geo_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
-DROP TABLE IF EXISTS `iphone_history`;
 CREATE TABLE `iphone_history` (
   `history_id` int(10) NOT NULL AUTO_INCREMENT,
   `user_id` int(10) NOT NULL,
@@ -764,8 +733,6 @@ CREATE TABLE `iphone_history` (
   KEY `confId` (`config_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
-DROP TABLE IF EXISTS `iphone_history_segment`;
 CREATE TABLE `iphone_history_segment` (
   `id` int(12) NOT NULL AUTO_INCREMENT,
   `config_id` int(10) NOT NULL,
@@ -787,8 +754,6 @@ CREATE TABLE `iphone_history_segment` (
   KEY `idx4` (`config_id`,`category_id`,`category_value`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-DROP TABLE IF EXISTS `iphone_last_plan`;
 CREATE TABLE `iphone_last_plan` (
   `config_id` int(10) NOT NULL,
   `user_id` int(10) NOT NULL,
@@ -798,8 +763,6 @@ CREATE TABLE `iphone_last_plan` (
   KEY `uid` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-DROP TABLE IF EXISTS `iphone_multi_category`;
 CREATE TABLE `iphone_multi_category` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
   `config_id` int(10) NOT NULL,
@@ -812,8 +775,6 @@ CREATE TABLE `iphone_multi_category` (
   KEY `deviceToken` (`device_token`(255))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-DROP TABLE IF EXISTS `iphone_panelist_balancing_queue`;
 CREATE TABLE `iphone_panelist_balancing_queue` (
   `queue_id` int(10) NOT NULL AUTO_INCREMENT,
   `queue_group` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
@@ -834,8 +795,6 @@ CREATE TABLE `iphone_panelist_balancing_queue` (
   KEY `questionnaire_id` (`questionnaire_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
-DROP TABLE IF EXISTS `iphone_panelist_history`;
 CREATE TABLE `iphone_panelist_history` (
   `history_id` int(10) NOT NULL AUTO_INCREMENT,
   `user_id` int(10) NOT NULL,
@@ -856,8 +815,6 @@ CREATE TABLE `iphone_panelist_history` (
   KEY `queue_group` (`queue_group`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
-DROP TABLE IF EXISTS `iphone_panelist_queue_group`;
 CREATE TABLE `iphone_panelist_queue_group` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `config_id` int(10) DEFAULT NULL,
@@ -876,8 +833,6 @@ CREATE TABLE `iphone_panelist_queue_group` (
   KEY `questionnaire_id` (`questionnaire_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
-DROP TABLE IF EXISTS `iphone_pem_status`;
 CREATE TABLE `iphone_pem_status` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `user_id` int(10) NOT NULL,
@@ -891,8 +846,6 @@ CREATE TABLE `iphone_pem_status` (
   KEY `index2` (`config_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-DROP TABLE IF EXISTS `iphone_push_request_queue`;
 CREATE TABLE `iphone_push_request_queue` (
   `queue_id` bigint(16) NOT NULL AUTO_INCREMENT,
   `user_id` int(10) NOT NULL,
@@ -908,8 +861,6 @@ CREATE TABLE `iphone_push_request_queue` (
   KEY `idx` (`config_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
-DROP TABLE IF EXISTS `iphone_queue`;
 CREATE TABLE `iphone_queue` (
   `queue_id` int(10) NOT NULL AUTO_INCREMENT,
   `user_id` int(10) NOT NULL,
@@ -918,13 +869,12 @@ CREATE TABLE `iphone_queue` (
   `device_token` text COLLATE utf8_unicode_ci NOT NULL,
   `url` text COLLATE utf8_unicode_ci NOT NULL,
   `message` text COLLATE utf8_unicode_ci NOT NULL,
+  `title` text COLLATE utf8_unicode_ci NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`queue_id`),
   KEY `idx` (`config_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
-DROP TABLE IF EXISTS `iphone_queue_group`;
 CREATE TABLE `iphone_queue_group` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `config_id` int(10) DEFAULT NULL,
@@ -933,6 +883,7 @@ CREATE TABLE `iphone_queue_group` (
   `category_ids` text,
   `url` text,
   `message` text,
+  `title` text,
   `status` tinyint(1) DEFAULT '1' COMMENT '1：実行前、2：実行中、3：終了',
   `total` int(10) DEFAULT '0',
   `start_time` datetime DEFAULT NULL,
@@ -940,10 +891,8 @@ CREATE TABLE `iphone_queue_group` (
   PRIMARY KEY (`id`),
   KEY `idx1` (`config_id`),
   KEY `idx2` (`queue_group`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17960 DEFAULT CHARSET=utf8;
 
-
-DROP TABLE IF EXISTS `iphone_rich_balancing_queue`;
 CREATE TABLE `iphone_rich_balancing_queue` (
   `queue_id` int(10) NOT NULL AUTO_INCREMENT,
   `queue_group` varchar(30) NOT NULL,
@@ -955,21 +904,22 @@ CREATE TABLE `iphone_rich_balancing_queue` (
   `device_token` text NOT NULL,
   `file_type` int(1) NOT NULL,
   `file` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `title` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `subtitle` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `body` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `title` text NOT NULL,
+  `subtitle` text NOT NULL,
+  `body` text NOT NULL,
   `push_type` tinyint(1) DEFAULT '1',
   `status` tinyint(1) DEFAULT '1',
   `code` int(2) DEFAULT '-1',
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `message` text,
+  `url` text,
+  `user_deleted_flag` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`queue_id`),
   KEY `idx` (`queue_group`),
   KEY `idx2` (`queue_group`,`queue_index`),
   KEY `configId` (`config_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
-
-DROP TABLE IF EXISTS `iphone_rich_file`;
 CREATE TABLE `iphone_rich_file` (
   `file_id` int(10) NOT NULL AUTO_INCREMENT,
   `user_id` int(10) NOT NULL,
@@ -985,8 +935,6 @@ CREATE TABLE `iphone_rich_file` (
   KEY `idx4` (`is_delete`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
-DROP TABLE IF EXISTS `iphone_rich_history`;
 CREATE TABLE `iphone_rich_history` (
   `history_id` int(10) NOT NULL AUTO_INCREMENT,
   `user_id` int(10) NOT NULL,
@@ -1009,8 +957,6 @@ CREATE TABLE `iphone_rich_history` (
   KEY `confId` (`config_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
-DROP TABLE IF EXISTS `iphone_rich_queue_group`;
 CREATE TABLE `iphone_rich_queue_group` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `config_id` int(10) DEFAULT NULL,
@@ -1032,8 +978,6 @@ CREATE TABLE `iphone_rich_queue_group` (
   KEY `idx2` (`queue_group`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
-DROP TABLE IF EXISTS `iphone_rich_schedule`;
 CREATE TABLE `iphone_rich_schedule` (
   `schedule_id` int(10) NOT NULL AUTO_INCREMENT,
   `config_id` int(10) NOT NULL,
@@ -1051,8 +995,6 @@ CREATE TABLE `iphone_rich_schedule` (
   KEY `finish` (`finish`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
-DROP TABLE IF EXISTS `iphone_schedule`;
 CREATE TABLE `iphone_schedule` (
   `schedule_id` int(10) NOT NULL AUTO_INCREMENT,
   `config_id` int(10) NOT NULL,
@@ -1065,8 +1007,6 @@ CREATE TABLE `iphone_schedule` (
   PRIMARY KEY (`schedule_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
-DROP TABLE IF EXISTS `iphone_schedule_segment`;
 CREATE TABLE `iphone_schedule_segment` (
   `id` int(12) NOT NULL AUTO_INCREMENT,
   `config_id` int(10) NOT NULL,
@@ -1088,8 +1028,6 @@ CREATE TABLE `iphone_schedule_segment` (
   KEY `idx4` (`category_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-DROP TABLE IF EXISTS `iphone_survey_balancing_queue`;
 CREATE TABLE `iphone_survey_balancing_queue` (
   `queue_id` int(10) NOT NULL AUTO_INCREMENT,
   `queue_group` varchar(30) NOT NULL,
@@ -1112,8 +1050,6 @@ CREATE TABLE `iphone_survey_balancing_queue` (
   KEY `uuid` (`uuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-DROP TABLE IF EXISTS `iphone_survey_history`;
 CREATE TABLE `iphone_survey_history` (
   `history_id` int(10) NOT NULL AUTO_INCREMENT,
   `user_id` int(10) NOT NULL,
@@ -1134,8 +1070,6 @@ CREATE TABLE `iphone_survey_history` (
   KEY `queue_group` (`queue_group`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
-DROP TABLE IF EXISTS `iphone_survey_queue_group`;
 CREATE TABLE `iphone_survey_queue_group` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `config_id` int(10) DEFAULT NULL,
@@ -1154,8 +1088,6 @@ CREATE TABLE `iphone_survey_queue_group` (
   KEY `questionnaire_id` (`questionnaire_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
-DROP TABLE IF EXISTS `iphone_token`;
 CREATE TABLE `iphone_token` (
   `token_id` int(10) NOT NULL AUTO_INCREMENT,
   `config_id` int(10) NOT NULL,
@@ -1173,8 +1105,6 @@ CREATE TABLE `iphone_token` (
   KEY `token_index` (`device_token`(255))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
-DROP TABLE IF EXISTS `iphone_token_count`;
 CREATE TABLE `iphone_token_count` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `config_id` int(10) DEFAULT '0',
@@ -1192,8 +1122,6 @@ CREATE TABLE `iphone_token_count` (
   KEY `idx2` (`config_id`,`category_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-DROP TABLE IF EXISTS `iphone_token_relation`;
 CREATE TABLE `iphone_token_relation` (
   `token_id` int(10) NOT NULL AUTO_INCREMENT,
   `config_id` int(10) NOT NULL,
@@ -1205,8 +1133,6 @@ CREATE TABLE `iphone_token_relation` (
   KEY `idx` (`config_id`,`app_user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
-DROP TABLE IF EXISTS `iphone_token_research_relation`;
 CREATE TABLE `iphone_token_research_relation` (
   `token_id` int(10) NOT NULL AUTO_INCREMENT,
   `config_id` int(10) NOT NULL,
@@ -1219,8 +1145,6 @@ CREATE TABLE `iphone_token_research_relation` (
   KEY `idx2` (`device_token`(255))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
-DROP TABLE IF EXISTS `iphone_token_rich`;
 CREATE TABLE `iphone_token_rich` (
   `token_id` int(10) NOT NULL AUTO_INCREMENT,
   `config_id` int(10) NOT NULL,
@@ -1239,8 +1163,6 @@ CREATE TABLE `iphone_token_rich` (
   KEY `cateory` (`category_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
-DROP TABLE IF EXISTS `log`;
 CREATE TABLE `log` (
   `log_id` int(10) NOT NULL AUTO_INCREMENT,
   `level` int(3) NOT NULL,
@@ -1251,8 +1173,6 @@ CREATE TABLE `log` (
   PRIMARY KEY (`log_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='ログ格納テーブル';
 
-
-DROP TABLE IF EXISTS `oem_user`;
 CREATE TABLE `oem_user` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `sub_domain` varchar(40) DEFAULT NULL COMMENT 'サブドメイン',
@@ -1264,8 +1184,6 @@ CREATE TABLE `oem_user` (
   KEY `idx` (`sub_domain`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-DROP TABLE IF EXISTS `panelist_history`;
 CREATE TABLE `panelist_history` (
   `history_id` int(10) NOT NULL AUTO_INCREMENT,
   `user_id` int(10) NOT NULL,
@@ -1285,8 +1203,6 @@ CREATE TABLE `panelist_history` (
   KEY `panelist_group` (`panelist_group`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
-DROP TABLE IF EXISTS `question`;
 CREATE TABLE `question` (
   `question_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(10) NOT NULL,
@@ -1301,8 +1217,6 @@ CREATE TABLE `question` (
   KEY `idx3` (`num`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
-DROP TABLE IF EXISTS `questionnaire`;
 CREATE TABLE `questionnaire` (
   `questionnaire_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(10) NOT NULL,
@@ -1318,8 +1232,6 @@ CREATE TABLE `questionnaire` (
   KEY `idx2` (`send_flg`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
-DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `user_id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'ユーザID',
   `company` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
@@ -1336,4 +1248,11 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
--- 2020-07-16 06:15:36
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
