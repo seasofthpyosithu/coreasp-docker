@@ -1,4 +1,4 @@
-FROM mysql:5.7
+FROM mysql:8.0.29
 ENV MYSQL_DATABASE=coreasp_v2_master
 ENV MYSQL_USER=coreaspdbmaster
 ENV MYSQL_PASSWORD='Ns918\$jaH82NmRr!eGw7'
