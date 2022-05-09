@@ -75,6 +75,7 @@ services:
     build:
       context: .
       dockerfile: ./docker/queue/Dockerfile
+    restart: always
   queue_worker:
     build:
       context: .
@@ -118,6 +119,9 @@ services:
       - 8081:80
     image: phpmyadmin:5.1.3-fpm-alpine
     links:
+      - queue_db
+      - master_db
+    depends_on:
       - queue_db
       - master_db
     # networks:
