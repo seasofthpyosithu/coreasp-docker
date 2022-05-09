@@ -19,6 +19,8 @@ stop() {
     kill $(ps aux | grep '[i]phone_individual_worker.php' | awk '{print $2}')
     kill $(ps aux | grep '[a]ndroid_worker.php' | awk '{print $2}')
     kill $(ps aux | grep '[p]ush_worker.php' | awk '{print $2}')
+    kill $(ps aux | grep '[a]ndroid_rich_worker.php' | awk '{print $2}')
+    kill $(ps aux | grep '[i]phone_rich_worker.php' | awk '{print $2}')
 }
 
 start() {
@@ -26,6 +28,8 @@ start() {
     /usr/bin/php /var/www/queue_worker/scripts/iphone_individual_worker.php >> /dev/stdout 2>&1 &
     /usr/bin/php /var/www/queue_worker/scripts/android_worker.php >> /dev/stdout 2>&1 &
     /usr/bin/php /var/www/queue_worker/scripts/push_worker.php >> /dev/stdout 2>&1 &
+    /usr/bin/php /var/www/queue_worker/scripts/android_rich_worker.php >> /dev/stdout 2>&1 &
+    /usr/bin/php /var/www/queue_worker/scripts/iphone_rich_worker.php >> /dev/stdout 2>&1 &
 }
 
 start
