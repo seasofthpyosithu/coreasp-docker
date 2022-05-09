@@ -1,7 +1,17 @@
 FROM base-php:latest
 
+RUN echo "" > /etc/ld.so.conf.d/custom-libs.conf
+
+RUN ldconfig
+
 RUN yum install -y gearmand \
     gearman
+
+RUN echo '/usr/local/ssl/lib' > /etc/ld.so.conf.d/custom-libs.conf
+RUN echo '/usr/local/lib' >> /etc/ld.so.conf.d/custom-libs.conf
+
+RUN ldconfig
+
 
 
 WORKDIR /app
