@@ -20,7 +20,7 @@ RUN chmod 777 /app/entrypoint.sh
 
 # RUN gearmand --help
 
-EXPOSE 7001 7002 7003 7004 7005 7006
+EXPOSE 7001 7002 7003 7004 7005 7006 7007 7008
 
 CMD [ "/app/entrypoint.sh" ]
 
