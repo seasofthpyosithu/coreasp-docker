@@ -21,4 +21,6 @@ WORKDIR /var/www/queue_worker
 
 COPY ./src/queue_worker .
 
+RUN chmod -R 777 pem/
+
 CMD [ "/app/entrypoint.sh" ]

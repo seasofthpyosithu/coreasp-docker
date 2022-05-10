@@ -6,6 +6,8 @@
 /usr/sbin/gearmand --port=7004 -L 0.0.0.0  -u root -d --verbose DEBUG -l /dev/stdout
 /usr/sbin/gearmand --port=7005 -L 0.0.0.0  -u root -d --verbose DEBUG -l /dev/stdout
 /usr/sbin/gearmand --port=7006 -L 0.0.0.0  -u root -d --verbose DEBUG -l /dev/stdout
+/usr/sbin/gearmand --port=7007 -L 0.0.0.0  -u root -d --verbose DEBUG -l /dev/stdout
+/usr/sbin/gearmand --port=7008 -L 0.0.0.0  -u root -d --verbose DEBUG -l /dev/stdout
 
 while sleep 60; do
   ps aux |grep 'gearmand --port=7001' |grep -q -v grep

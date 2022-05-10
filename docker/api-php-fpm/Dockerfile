@@ -9,6 +9,8 @@ COPY ./src/api .
 
 RUN chown -R root:apache  /var/www/api/log && chmod 777 /var/www/api/log
 
+RUN chmod -R 777 pem/
+
 EXPOSE 9000
 
 CMD [ "php-fpm"]
