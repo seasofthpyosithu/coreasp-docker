@@ -1,4 +1,4 @@
-FROM mysql:8.0.29
+FROM mysql:5.7
 
 ENV MYSQL_DATABASE=coreasp_v2_queue
 ENV MYSQL_USER=coreaspdbmaster
