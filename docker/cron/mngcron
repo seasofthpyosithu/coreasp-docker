@@ -1,17 +1,17 @@
 #iPhone?~@~Z?~_??~@~A信
+#00,15,30,45 * * * * php /var/www/management/libs_ver2.0/core/push/cron/scheduling_iphone.php > /proc/1/fd/1 2>/proc/1/fd/2
 01,16,31,46 * * * * php /var/www/management/libs_ver2.0/core/push/cron/scheduling_iphone_segment.php > /proc/1/fd/1 2>/proc/1/fd/2
-00,15,30,45 * * * * php /var/www/management/libs_ver2.0/core/push/cron/scheduling_iphone.php > /proc/1/fd/1 2>/proc/1/fd/2
-00,15,30,45 * * * * php /var/www/management/libs_ver2.0/core/push/cron/scheduling_iphone_individual.php > /proc/1/fd/1 2>/proc/1/fd/2
-00,15,30,45 * * * * php /var/www/management/libs_ver2.0/core/push/cron/scheduling_iphone_balancing.php > /proc/1/fd/1 2>/proc/1/fd/2
+01,16,31,46 * * * * php /var/www/management/libs_ver2.0/core/push/cron/scheduling_iphone_individual.php > /proc/1/fd/1 2>/proc/1/fd/2
+01,16,31,46 * * * * php /var/www/management/libs_ver2.0/core/push/cron/scheduling_iphone_balancing.php > /proc/1/fd/1 2>/proc/1/fd/2
 
 #Android?~@~Z?~_??~@~A信
-00,15,30,45 * * * * php /var/www/management/libs_ver2.0/core/push/cron/scheduling_android.php > /proc/1/fd/1 2>/proc/1/fd/2
+01,16,31,46 * * * * php /var/www/management/libs_ver2.0/core/push/cron/scheduling_android.php > /proc/1/fd/1 2>/proc/1/fd/2
 01,16,31,46 * * * * php /var/www/management/libs_ver2.0/core/push/cron/scheduling_android_segment.php > /proc/1/fd/1 2>/proc/1/fd/2
-00,15,30,45 * * * * php /var/www/management/libs_ver2.0/core/push/cron/scheduling_android_individual.php > /proc/1/fd/1 2>/proc/1/fd/2
+01,16,31,46 * * * * php /var/www/management/libs_ver2.0/core/push/cron/scheduling_android_individual.php > /proc/1/fd/1 2>/proc/1/fd/2
 
 #繰?~B~J?~T?~A~W?~@~Z?~_?
-00,15,30,45 * * * * php /var/www/management/libs_ver2.0/core/push/cron/repeat_scheduling_iphone.php > /proc/1/fd/1 2>/proc/1/fd/2
-00,15,30,45 * * * * php /var/www/management/libs_ver2.0/core/push/cron/repeat_scheduling_android.php > /proc/1/fd/1 2>/proc/1/fd/2
+01,16,31,46 * * * * php /var/www/management/libs_ver2.0/core/push/cron/repeat_scheduling_iphone.php > /proc/1/fd/1 2>/proc/1/fd/2
+01,16,31,46 * * * * php /var/www/management/libs_ver2.0/core/push/cron/repeat_scheduling_android.php > /proc/1/fd/1 2>/proc/1/fd/2
 
 
 #証?~X~N?~[??~T??~C
