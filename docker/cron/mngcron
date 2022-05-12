@@ -1,7 +1,8 @@
 #iPhone?~@~Z?~_??~@~A信
-01,16,31,46 * * * * php /var/www/management/libs_ver2.0/core/push/cron/scheduling_iphone_segment.php> /proc/1/fd/1 2>/proc/1/fd/2
-00,15,30,45 * * * * php /var/www/management/libs_ver2.0/core/push/cron/scheduling_iphone.php> /proc/1/fd/1 2>/proc/1/fd/2
-00,15,30,45 * * * * php /var/www/management/libs_ver2.0/core/push/cron/scheduling_iphone_individual.php> /proc/1/fd/1 2>/proc/1/fd/2
+01,16,31,46 * * * * php /var/www/management/libs_ver2.0/core/push/cron/scheduling_iphone_segment.php > /proc/1/fd/1 2>/proc/1/fd/2
+00,15,30,45 * * * * php /var/www/management/libs_ver2.0/core/push/cron/scheduling_iphone.php > /proc/1/fd/1 2>/proc/1/fd/2
+00,15,30,45 * * * * php /var/www/management/libs_ver2.0/core/push/cron/scheduling_iphone_individual.php > /proc/1/fd/1 2>/proc/1/fd/2
+00,15,30,45 * * * * php /var/www/management/libs_ver2.0/core/push/cron/scheduling_iphone_balancing.php > /proc/1/fd/1 2>/proc/1/fd/2
 
 #Android?~@~Z?~_??~@~A信
 00,15,30,45 * * * * php /var/www/management/libs_ver2.0/core/push/cron/scheduling_android.php > /proc/1/fd/1 2>/proc/1/fd/2
@@ -21,9 +22,13 @@
 
 
 * * * * * php /var/www/management/scripts/iphone_ab_time.php >> /var/tmp/iphone_ab_time.log > /proc/1/fd/1 2>/proc/1/fd/2
-* * * * * php /var/www/management/scripts/android_ab_time.php >> /var/tmp/android_ab_time.log> /proc/1/fd/1 2>/proc/1/fd/2
+* * * * * php /var/www/management/scripts/android_ab_time.php >> /var/tmp/android_ab_time.log > /proc/1/fd/1 2>/proc/1/fd/2
 
 #00,30 * * * * php /var/www/management/libs_ver2.0/core/push/cron/temp_scheduling_android.php
 #00,30 * * * * php /var/www/management/libs_ver2.0/core/push/cron/temp_scheduling_iphone.php
 
 0 2 * * * php /var/www/management/libs_ver2.0/core/push/cron/expenses_plan_check.php > /proc/1/fd/1 2>/proc/1/fd/2
+
+
+* * * * * php /var/www/management/libs_ver2.0/core/push/cron/action_push_iphone.php >> /var/tmp/action_push_iphone.log > /proc/1/fd/1 2>/proc/1/fd/2
+* * * * * php /var/www/management/libs_ver2.0/core/push/cron/action_push_android.php >> /var/tmp/action_push_android.log > /proc/1/fd/1 2>/proc/1/fd/2
