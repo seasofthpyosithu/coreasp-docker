@@ -7,8 +7,9 @@ WORKDIR /var/www/management
 COPY ./src/mng .
 
 # RUN chown -R root:apache  /var/www/management/tmp && chmod 777 /var/www/management/tmp
-
-RUN chmod -R 777 pem/
+RUN chown -R root:apache log/ && chmod 777 log/
+RUN chown -R root:apache pem/ && chmod 777 pem/
+RUN chown -R root:apache tmp/ && chmod 777 tmp/
 
 EXPOSE 9000
 
