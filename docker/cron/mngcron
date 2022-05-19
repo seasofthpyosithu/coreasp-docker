@@ -30,5 +30,5 @@
 0 2 * * * php /var/www/management/libs_ver2.0/core/push/cron/expenses_plan_check.php > /proc/1/fd/1 2>/proc/1/fd/2
 
 
-* * * * * php /var/www/management/libs_ver2.0/core/push/cron/action_push_iphone.php >> /var/tmp/action_push_iphone.log > /proc/1/fd/1 2>/proc/1/fd/2
-* * * * * php /var/www/management/libs_ver2.0/core/push/cron/action_push_android.php >> /var/tmp/action_push_android.log > /proc/1/fd/1 2>/proc/1/fd/2
+* * * * * php /var/www/management/libs_ver2.0/core/push/cron/action_push_iphone.php > /proc/1/fd/1 2>/proc/1/fd/2
+* * * * * php /var/www/management/libs_ver2.0/core/push/cron/action_push_android.php > /proc/1/fd/1 2>/proc/1/fd/2
