@@ -1,4 +1,4 @@
-FROM centos:6.10
+FROM --platform=x86_64 centos:6.10
 
 COPY "./docker/base-centos/yum.repos.d/." "/etc/yum.repos.d/"
 COPY "./docker/base-centos/rpm-gpg/." "/etc/pki/rpm-gpg/"

@@ -1,4 +1,4 @@
-FROM mysql:5.7
+FROM --platform=x86_64 mysql:5.7
 
 ENV MYSQL_DATABASE=coreasp_v2_queue
 ENV MYSQL_USER=coreaspdbmaster
@@ -8,4 +8,4 @@ ENV MYSQL_ROOT_PASSWORD=root
 RUN rm -rf /etc/localtime
 RUN ln -s /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 
-COPY ./docker/queue_db/*.sql /docker-entrypoint-initdb.d
+COPY ./docker/queue_db/*.sql /docker-entrypoint-initdb.d/
