@@ -5,6 +5,7 @@ RUN yum install -y php \
     php-pear \
     php-mbstring \
     php-fpm \
+    php-pdo \
     php-devel \
     epel-release \
     libgearman \

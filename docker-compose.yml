@@ -124,5 +124,3 @@ services:
     links:
       - queue_db
       - master_db
-    # networks:
-    #   - backend
