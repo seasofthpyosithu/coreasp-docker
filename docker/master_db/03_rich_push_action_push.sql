@@ -22,7 +22,7 @@ ADD file_type tinyint(4);
 
 
 
-Master_db
+-- Master_db
 
 ALTER TABLE  iphone_schedule
 ADD file_url varchar(255),
