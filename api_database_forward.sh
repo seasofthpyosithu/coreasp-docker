@@ -1,0 +1,1 @@
+ssh -fNT -L 3310:"coreasp-v2-ticketpia-master-db.cluster-ckhlsz9lb8ej.ap-northeast-1.rds.amazonaws.com":3306 api.ticketpia.com
