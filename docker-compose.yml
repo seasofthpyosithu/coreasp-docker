@@ -24,13 +24,16 @@ services:
       - "./src/mng/www:/var/www/management/www"
       - "./src/mng/libs_ver2.0:/var/www/management/libs_ver2.0"
     depends_on:
-      - master_db
-      - queue_db
-      - queue
+      # - queue_db
+      # - master_db
+      - master_db_8
+      - queue_db_8
     links:
-      - master_db
+      # - queue_db
+      # - master_db
       - queue
-      - queue_db
+      - master_db_8
+      - queue_db_8
   api-nginx:
     build:
       context: .
@@ -50,13 +53,16 @@ services:
       - "./src/api/www:/var/www/api/www"
       - "./src/api/libs_ver2.0:/var/www/api/libs_ver2.0"
     depends_on:
-      - master_db
-      - queue_db
-      - queue
+      # - queue_db
+      # - master_db
+      - master_db_8
+      - queue_db_8
     links:
-      - master_db
-      - queue_db
+      # - queue_db
+      # - master_db
       - queue
+      - master_db_8
+      - queue_db_8
   cron:
     build:
       context: .
@@ -64,13 +70,16 @@ services:
     volumes:
       - "./src/mng/libs_ver2.0:/var/www/management/libs_ver2.0"
     depends_on:
-      - master_db
-      - queue_db
-      - queue
+      # - queue_db
+      # - master_db
+      - master_db_8
+      - queue_db_8
     links:
-      - master_db
+      # - queue_db
+      # - master_db
       - queue
-      - queue_db
+      - master_db_8
+      - queue_db_8
   queue:
     build:
       context: .
@@ -84,35 +93,59 @@ services:
       - "./src/queue_worker/scripts:/var/www/queue_worker/scripts"
       - "./src/queue_worker/libs_ver2.0:/var/www/queue_worker/libs_ver2.0"
     depends_on:
-      - master_db
-      - queue_db
-      - queue
+      # - queue_db
+      # - master_db
+      - master_db_8
+      - queue_db_8
     links:
-      - master_db
-      - queue_db
+      # - queue_db
+      # - master_db
       - queue
-  master_db:
+      - master_db_8
+      - queue_db_8
+  # master_db:
+  #   build:
+  #     context: .
+  #     dockerfile: ./docker/master_db/Dockerfile
+  #   command: mysqld --sql_mode="STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_AUTO_CREATE_USER,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION"
+  #   volumes:
+  #     - ./data/master_db:/var/lib/mysql
+  #   # ports:
+  #   #   - 3307:3306
+  #   # networks:
+  #   #   - backend
+  master_db_8:
     build:
       context: .
-      dockerfile: ./docker/master_db/Dockerfile
-    command: mysqld --sql_mode="STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_AUTO_CREATE_USER,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION"
+      dockerfile: ./docker/master_db_8/Dockerfile
+    command: mysqld --default-authentication-plugin=mysql_native_password --sql_mode="STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION"
     volumes:
-      - ./data/master_db:/var/lib/mysql
-    # ports:
-    #   - 3307:3306
+      - ./data/master_db_8:/var/lib/mysql
+    ports:
+      - 3307:3306
     # networks:
     #   - backend
-  queue_db:
+  # queue_db:
+  #   build:
+  #     context: .
+  #     dockerfile: ./docker/queue_db/Dockerfile
+  #   command: mysqld --sql_mode="STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_AUTO_CREATE_USER,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION"
+  #   volumes:
+  #     - ./data/queue_db:/var/lib/mysql
+  #   # ports:
+  #   #   - 3308:3306
+  #   # networks:
+    #   - backend
+  queue_db_8:
     build:
       context: .
-      dockerfile: ./docker/queue_db/Dockerfile
-    command: mysqld --sql_mode="STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_AUTO_CREATE_USER,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION"
+      dockerfile: ./docker/queue_db_8/Dockerfile
+    command: mysqld --default-authentication-plugin=mysql_native_password --sql_mode="STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION"
+
     volumes:
-      - ./data/queue_db:/var/lib/mysql
-    # ports:
-    #   - 3308:3306
-    # networks:
-    #   - backend
+      - ./data/queue_db_8:/var/lib/mysql
+    ports:
+      - 3308:3306
   core_db_client:
     container_name: core_db_client
     environment:
@@ -122,5 +155,8 @@ services:
     image: adminer:latest
     command: ['php', '-S', '0.0.0.0:8080']
     links:
-      - queue_db
-      - master_db
+      # - queue_db
+      # - master_db
+      - master_db_8
+      - queue_db_8
+

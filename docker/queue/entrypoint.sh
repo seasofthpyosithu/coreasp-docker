@@ -9,6 +9,16 @@
 /usr/sbin/gearmand --port=7007 -L 0.0.0.0  -u root -d --verbose DEBUG -l /dev/stdout
 /usr/sbin/gearmand --port=7008 -L 0.0.0.0  -u root -d --verbose DEBUG -l /dev/stdout
 
+/usr/sbin/gearmand --port=8001 -L 0.0.0.0 -u root -d --verbose DEBUG -l /dev/stdout
+/usr/sbin/gearmand --port=8002 -L 0.0.0.0  -u root -d --verbose DEBUG -l /dev/stdout
+/usr/sbin/gearmand --port=8003 -L 0.0.0.0  -u root -d --verbose DEBUG -l /dev/stdout
+/usr/sbin/gearmand --port=8004 -L 0.0.0.0  -u root -d --verbose DEBUG -l /dev/stdout
+/usr/sbin/gearmand --port=8005 -L 0.0.0.0  -u root -d --verbose DEBUG -l /dev/stdout
+/usr/sbin/gearmand --port=8006 -L 0.0.0.0  -u root -d --verbose DEBUG -l /dev/stdout
+/usr/sbin/gearmand --port=8007 -L 0.0.0.0  -u root -d --verbose DEBUG -l /dev/stdout
+/usr/sbin/gearmand --port=8008 -L 0.0.0.0  -u root -d --verbose DEBUG -l /dev/stdout
+
+
 while sleep 60; do
   ps aux |grep 'gearmand --port=7001' |grep -q -v grep
   PROCESS_1_STATUS=$?
