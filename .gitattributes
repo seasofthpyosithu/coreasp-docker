@@ -1,0 +1,11 @@
+docker/base-centos/yum.repos.d/* eol=lf
+docker/base-centos/rpm-gpg/* eol=lf
+docker/base-php/php.ini eol=lf
+docker/api-nginx/nginx.conf eol=lf
+docker/api-php-fpm/docker.conf eol=lf
+docker/api-php-fpm/www.conf eol=lf
+docker/mng-nginx/nginx.conf eol=lf
+docker/mng-php-fpm/docker.conf eol=lf
+docker/mng-php-fpm/www.conf eol=lf
+docker/cron/entrypoint.sh eol=lf
+docker/queue_worker/entrypoint.sh eol=lf
